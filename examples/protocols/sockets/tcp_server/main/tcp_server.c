@@ -196,7 +196,8 @@ static void tcp_server_task(void *pvParameters)
         if (sock != -1) {
             ESP_LOGE(TAG, "Shutting down socket and restarting...");
             shutdown(sock, 0);
-            close(sock);
+            close(sock);         // closing client socket
+            close(listen_sock);  // closing server socket
         }
     }
     vTaskDelete(NULL);
